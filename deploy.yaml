@@ -2,6 +2,10 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: my-python
+  labels:
+    tags.datadoghq.com/env: "salah"
+    tags.datadoghq.com/service: "ddd"
+    tags.datadoghq.com/version: "1.6"
 spec:
   replicas: 1
   selector:
@@ -11,6 +15,12 @@ spec:
     metadata:
       labels:
         app: python-app
+        admission.datadoghq.com/enabled: "true" # Enable Admission Controller to mutate new pods part of this deployment
+        tags.datadoghq.com/env: "salah"
+        tags.datadoghq.com/service: "ddd"
+        tags.datadoghq.com/version: "1.6"
+      annotations:
+        admission.datadoghq.com/python-lib.version: "1.0"
     spec:
       containers:
         - name: my-python
