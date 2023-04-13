@@ -25,13 +25,9 @@ spec:
               cpu: "500m"
           env:
             - name: DD_AGENT_HOST
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.hostIP
+              value: 10.217.4.49
             - name: DOGSTATSD_HOST_IP
-              valueFrom:
-                fieldRef:
-                  fieldPath: status.hostIP
+              value: 10.217.4.49
             - name: DD_LOGS_INJECTION
               value: 'true'
             - name: DD_TRACE_ANALYTICS_ENABLED
