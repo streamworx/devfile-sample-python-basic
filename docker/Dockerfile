@@ -17,5 +17,4 @@ RUN pip install -r requirements.txt
 COPY . .
 
 # Specify the command to run on container start
-ENTRYPOINT ["ddtrace-run"]
-CMD [ "python", "./app.py" ]
+CMD [ "ddtrace-run", "python", "./app.py" ]
