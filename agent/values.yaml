@@ -1,0 +1,103 @@
+agents:
+  podSecurity:
+    securityContextConstraints:
+      create: true
+  tolerations:
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/master
+      operator: Exists
+    - effect: NoSchedule
+      key: node-role.kubernetes.io/infra
+      operator: Exists
+  useHostNetwork: true
+clusterAgent:
+  admissionController:
+    enabled: true
+    mutateUnlabelled: false
+  podSecurity:
+    securityContextConstraints:
+      create: true
+clusterChecksRunner:
+  enabled: true
+  replicas: 2
+datadog:
+  apiKey: 1ec5a2227833dad1bb7eac5eb996298e
+  appKey: ea6e797a5747a98994182e4738532b67817ed1a7
+  apm:
+    portEnabled: false
+  clusterName: budiclustere
+  confd:
+    cri.yaml: |-
+      init_config:
+      instances:
+        - collect_disk: true
+  criSocketPath: /var/run/crio/crio.sock
+  kubelet:
+    tlsVerify: false
+  logs:
+    enabled: true
+  processAgent:
+    enabled: true
+    processCollection: true
+  tags: []
+  ## ref: https://docs.datadoghq.com/agent/kubernetes/dogstatsd/
+  ## To emit custom metrics from your Kubernetes application, use DogStatsD.
+  dogstatsd:
+    # datadog.dogstatsd.port -- Override the Agent DogStatsD port
+
+    ## Note: Make sure your client is sending to the same UDP port.
+    port: 8125
+
+    # datadog.dogstatsd.originDetection -- Enable origin detection for container tagging
+
+    ## ref: https://docs.datadoghq.com/developers/dogstatsd/unix_socket/#using-origin-detection-for-container-tagging
+    originDetection: false
+
+    # datadog.dogstatsd.tags -- List of static tags to attach to every custom metric, event and service check collected by Dogstatsd.
+
+    ## Learn more about tagging: https://docs.datadoghq.com/tagging/
+    tags: []
+    #   - "<KEY_1>:<VALUE_1>"
+    #   - "<KEY_2>:<VALUE_2>"
+
+    # datadog.dogstatsd.tagCardinality -- Sets the tag cardinality relative to the origin detection
+
+    ## ref: https://docs.datadoghq.com/developers/dogstatsd/unix_socket/#using-origin-detection-for-container-tagging
+    tagCardinality: low
+
+    # datadog.dogstatsd.useSocketVolume -- Enable dogstatsd over Unix Domain Socket with an HostVolume
+
+    ## ref: https://docs.datadoghq.com/developers/dogstatsd/unix_socket/
+    useSocketVolume: true
+
+    # datadog.dogstatsd.socketPath -- Path to the DogStatsD socket
+    socketPath: /var/run/datadog/dsd.socket
+
+    # datadog.dogstatsd.hostSocketPath -- Host path to the DogStatsD socket
+    hostSocketPath: /var/run/datadog/
+
+    # datadog.dogstatsd.useHostPort -- Sets the hostPort to the same value of the container port
+
+    ## Needs to be used for sending custom metrics.
+    ## The ports need to be available on all hosts.
+    ##
+    ## WARNING: Make sure that hosts using this are properly firewalled otherwise
+    ## metrics and traces are accepted from any host able to connect to this host.
+    useHostPort: false
+
+    # datadog.dogstatsd.useHostPID -- Run the agent in the host's PID namespace
+    ## DEPRECATED: use datadog.useHostPID instead.
+
+    ## This is required for Dogstatsd origin detection to work.
+    ## See https://docs.datadoghq.com/developers/dogstatsd/unix_socket/
+    useHostPID: false
+
+    # datadog.dogstatsd.nonLocalTraffic -- Enable this to make each node accept non-local statsd traffic (from outside of the pod)
+
+    ## ref: https://github.com/DataDog/docker-dd-agent#environment-variables
+    nonLocalTraffic: true
+
+kube-state-metrics:
+  securityContext:
+    enabled: false
+targetSystem: linux
