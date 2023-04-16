@@ -18,6 +18,9 @@ spec:
     metadata:
       labels:
         app: python-app
+        admission.datadoghq.com/enabled: "true" # Enable Admission Controller to mutate new pods part of this deployment
+
+
     spec:
       containers:
         - name: my-python
