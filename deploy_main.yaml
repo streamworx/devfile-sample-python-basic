@@ -1,0 +1,67 @@
+kind: Deployment
+apiVersion: apps/v1
+metadata:
+  name: my-python
+  labels:
+    tags.datadoghq.com/env: "salah"
+    tags.datadoghq.com/service: "ddd"
+    tags.datadoghq.com/version: "1.6"
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: python-app
+  template:
+    metadata:
+      labels:
+        app: python-app
+        admission.datadoghq.com/enabled: "true" # Enable Admission Controller to mutate new pods part of this deployment
+        tags.datadoghq.com/env: "salah"
+        tags.datadoghq.com/service: "ddd"
+        tags.datadoghq.com/version: "1.6"
+      annotations:
+        admission.datadoghq.com/python-lib.version: "1.0"
+    spec:
+      containers:
+        - name: my-python
+          image: python-image:latest
+          ports:
+            - name: http
+              containerPort: 8081
+              protocol: TCP
+          resources:
+            limits:
+              memory: "128Mi"
+              cpu: "500m"
+          env:
+            - name: DD_AGENT_HOST
+              value: 10.217.4.49
+            - name: DOGSTATSD_HOST_IP
+              value: 10.217.4.49
+            - name: DD_LOGS_INJECTION
+              value: 'true'
+            - name: DD_TRACE_ANALYTICS_ENABLED
+              value: 'true'
+            - name: DATADOG_SERVICE_NAME
+              value: 'frontend-service'
+            - name: FLASK_APP
+              value: 'api'
+            - name: FLASK_DEBUG
+              value: '1'
+            - name: FLASK_RUN_PORT
+              value: '5005'
+            - name: DATADOG_PATCH_MODULES
+              value: 'requests:true'
+---
+kind: Service
+apiVersion: v1
+metadata:
+  name: my-python
+spec:
+ports:
+  - name: http-8081
+    port: 8081
+    protocol: TCP
+    targetPort: 8081
+selector:
+  app: python-app
