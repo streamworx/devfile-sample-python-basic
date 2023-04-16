@@ -8,7 +8,6 @@ metadata:
     tags.datadoghq.com/env: "canary-deployments"
     tags.datadoghq.com/service: "discounts-service"
     tags.datadoghq.com/version: "1.0"
-
 spec:
   replicas: 1
   selector:
@@ -41,6 +40,20 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: status.hostIP
+            - name: DD_LOGS_INJECTION
+              value: 'true'
+            - name: DD_TRACE_ANALYTICS_ENABLED
+              value: 'true'
+            - name: DATADOG_SERVICE_NAME
+              value: 'frontend-service'
+            - name: FLASK_APP
+              value: 'api'
+            - name: FLASK_DEBUG
+              value: '1'
+            - name: FLASK_RUN_PORT
+              value: '5005'
+            - name: DATADOG_PATCH_MODULES
+              value: 'requests:true'
           resources:
             limits:
               memory: "128Mi"
