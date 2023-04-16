@@ -32,10 +32,20 @@ spec:
             - name: http
               containerPort: 8081
               protocol: TCP
+          env:
+            - name: DD_AGENT_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: DOGSTATSD_HOST_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
           resources:
             limits:
               memory: "128Mi"
               cpu: "500m"
+
 ---
 kind: Service
 apiVersion: v1
