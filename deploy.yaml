@@ -36,22 +36,20 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: status.hostIP
+            - name: DD_LOGS_INJECTION
+              value: "true"
+            - name: DD_ANALYTICS_ENABLED
+              value: "true"
+            - name: DD_PROFILING_ENABLED
+              value: "true"
             - name: DOGSTATSD_HOST_IP
               valueFrom:
                 fieldRef:
                   fieldPath: status.hostIP
-            - name: DD_LOGS_INJECTION
-              value: 'true'
             - name: DD_TRACE_ANALYTICS_ENABLED
               value: 'true'
             - name: DATADOG_SERVICE_NAME
               value: 'frontend-service'
-            - name: FLASK_APP
-              value: 'api'
-            - name: FLASK_DEBUG
-              value: '1'
-            - name: FLASK_RUN_PORT
-              value: '5005'
             - name: DATADOG_PATCH_MODULES
               value: 'requests:true'
           resources:
