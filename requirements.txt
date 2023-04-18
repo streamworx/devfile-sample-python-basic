@@ -4,7 +4,7 @@ chardet==3.0.4
 click
 #Cython==0.28.5 # commmented out for non-arm deployment
 ddtrace==0.24.0
-Flask-SQLAlchemy==2.3.2
+Flask-SQLAlchemy
 idna==2.7
 itsdangerous
 Jinja2
@@ -14,7 +14,7 @@ psycopg2
 PyDispatcher==2.0.5
 requests==2.20.0
 six==1.11.0
-SQLAlchemy>=1.3.0
+SQLAlchemy
 urllib3==1.24.2
 Werkzeug
 wrapt
