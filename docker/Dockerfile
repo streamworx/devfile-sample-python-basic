@@ -5,7 +5,7 @@ EXPOSE 8081/tcp
 ENV FLASK_PORT=8081
 ENV POSTGRES_USER=postgres
 ENV POSTGRES_PASSWORD=postgres
-POSTGRES_SERVICE_HOST=postgres
+ENV POSTGRES_SERVICE_HOST=postgres
 
 # Set the working directory in the container
 WORKDIR /projects
