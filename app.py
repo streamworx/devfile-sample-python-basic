@@ -19,7 +19,7 @@ app = create_app()
 
 @app.route('/')
 def hello():
-    return "Hello World! kojek alo jkt on dev-post2"
+    return "Hello World! kojek alo jkt on dev-post2 setelah beres req"
 
 if __name__ == '__main__':
     port = os.environ.get('FLASK_PORT') or 8080
