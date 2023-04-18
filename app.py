@@ -19,7 +19,7 @@ app = create_app()
 
 @app.route('/')
 def hello():
-    return "Hello World! kojek alo jkt on dev-post2 setelah beres req"
+    return "Hello World! kojek alo jkt on dev-post2 setelah beres req test deploy"
 
 
 @app.route('/sensors', methods=['GET', 'POST'])
@@ -39,7 +39,7 @@ def get_sensors():
         err = jsonify({'error': 'Invalid request method'})
         err.status_code = 405
         return err
-        
+
 if __name__ == '__main__':
     port = os.environ.get('FLASK_PORT') or 8080
     port = int(port)
