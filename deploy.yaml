@@ -19,6 +19,27 @@ spec:
             - name: http
               containerPort: 8081
               protocol: TCP
+          env:
+            - name: DD_AGENT_HOST
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            - name: DOGSTATSD_HOST_IP
+              valueFrom:
+                fieldRef:
+                  fieldPath: status.hostIP
+            # - name: DATADOG_SERVICE_NAME
+            #   value: 'sensors-api'
+            # - name: DD_LOGS_INJECTION
+            #   value: 'true'
+            # - name: DD_TRACE_ANALYTICS_ENABLED
+            #   value: 'true'
+            - name: FLASK_APP
+              value: 'sensors'
+            - name: FLASK_DEBUG
+              value: '1'
+            - name: FLASK_RUN_PORT
+              value: '5002'
           resources:
             limits:
               memory: "128Mi"
