@@ -6,11 +6,11 @@ click==6.7
 ddtrace==0.24.0
 Flask-SQLAlchemy==2.3.2
 idna==2.7
-itsdangerous==0.24
+itsdangerous
 Jinja2
 MarkupSafe
 msgpack-python==0.5.6
-psycopg2==2.7.5
+psycopg2
 PyDispatcher==2.0.5
 requests==2.20.0
 six==1.11.0
