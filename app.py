@@ -1,7 +1,21 @@
-from flask import Flask
 import os
+import requests
 
-app = Flask(__name__)
+from flask import Flask, Response, jsonify
+from flask import request as flask_request
+
+from ddtrace import tracer
+
+from bootstrap import create_app, db
+from models import Network, Sensor
+
+import random
+
+
+# app = Flask(__name__)
+sensors = []
+
+app = create_app()
 
 @app.route('/')
 def hello():
