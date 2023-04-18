@@ -28,12 +28,12 @@ spec:
               valueFrom:
                 fieldRef:
                   fieldPath: status.hostIP
-            # - name: DATADOG_SERVICE_NAME
-            #   value: 'sensors-api'
-            # - name: DD_LOGS_INJECTION
-            #   value: 'true'
-            # - name: DD_TRACE_ANALYTICS_ENABLED
-            #   value: 'true'
+            - name: DATADOG_SERVICE_NAME
+              value: 'sensors-api'
+            - name: DD_LOGS_INJECTION
+              value: 'true'
+            - name: DD_TRACE_ANALYTICS_ENABLED
+              value: 'true'
             - name: FLASK_APP
               value: 'sensors'
             - name: FLASK_DEBUG
